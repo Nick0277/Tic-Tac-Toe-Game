@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="index.css">
+   <title>Tic-Tac-Toe Game</title>
+</head>
+
+<body>
+   <div class="template">
+      <div class="box">
+         <div class="boxStyle" id="topLeft"></div>
+         <div class="boxStyle" id="topCenter"></div>
+         <div class="boxStyle" id="topRight"></div>
+         <div class="boxStyle" id="middleLeft"></div>
+         <div class="boxStyle" id="middleCenter"></div>
+         <div class="boxStyle" id="middleRight"></div>
+         <div class="boxStyle" id="bottomLeft"></div>
+         <div class="boxStyle" id="bottomCenter"></div>
+         <div class="boxStyle" id="bottomRight"></div>
+      </div>
+      <div class="display">
+         <div class="playerScore">
+            <p class="player1">Player(x)</p>
+            <h1 class="playerSc">0</h1>
+         </div>
+         <div class="tieScore">
+            <p>Tie</p>
+            <h1 class="tieSc">0</h1>
+         </div>
+         <div class="computerScore">
+            <p class="player2">Computer(O)</p>
+            <h1 class="computerSc">0</h1>
+         </div>
+      </div>
+   </div>
+   <div class="audio">
+      <input type="checkbox" id="volumeCheckbox">
+      <img class="volumeIcon" src="./media/audioOn.png" alt="volume icon">
+   </div>
+   <div class="multiplayer">
+      <input type="checkbox" id="multiplayerCheckbox">
+      <img class="multiplayerIcon" src="./media/singleplayer.png" alt="multiplayer icon">
+   </div>
+   <div class="reset">
+      <img class="resetIcon" src="./media/reset.png" alt="multiplayer icon">
+   </div>
+
+   <script src="app.js"></script>
+</body>
+
+</html>

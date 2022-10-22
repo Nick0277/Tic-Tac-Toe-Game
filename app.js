@@ -114,7 +114,6 @@ boxStyle.forEach(btn => {
                      Clickinterval = true;
                   }, 600);
                }
-               console.log(counter);
                if (!singleplayer) {
                   setTimeout(() => {
                      Clickinterval = true;

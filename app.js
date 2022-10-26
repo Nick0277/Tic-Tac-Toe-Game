@@ -46,6 +46,18 @@ multiplayerCheckbox.addEventListener('click', () => {
       playerScore.innerText = tieScore.innerText = computerScore.innerText = 0;
    }
 });
+const hardModeIcon = document.querySelector(".hardModeIcon");
+const modeCheckbox = document.querySelector("#modeCheckbox");
+let hardMode = true;
+modeCheckbox.addEventListener('click', () => {
+   if (modeCheckbox.checked) {
+      hardModeIcon.src = "./media/easyMode.png";
+      hardMode = false;
+   } else if (!modeCheckbox.checked) {
+      hardModeIcon.src = "./media/hardMode.png";
+      hardMode = true;
+   }
+});
 
 // Player(X), Tie, Computer(O) - Scores
 const playerScore = document.querySelector(".playerSc");
@@ -162,6 +174,7 @@ boxStyle.forEach(btn => {
          remainingSlots = [0, 1, 2, 3, 4, 5, 6, 7, 8];
          if ((player + tie + computer) % 2 !== 0) {
             playerTurn = false;
+            computerPlays();
             setTimeout(() => {
                playerTurn = true;
             }, 650);
@@ -169,7 +182,6 @@ boxStyle.forEach(btn => {
       }
    });
 });
-
 
 
 function player_1_plays() {
@@ -230,20 +242,94 @@ function O_turn() {
 function computerPlays() {
    if (!gameOver) {
       setTimeout(() => {
-         let randomNumber = remainingSlots[Math.floor(Math.random() * remainingSlots.length)];
-         remainingSlots = remainingSlots.filter(e => e !== randomNumber);
-         let nil = document.createElement('img');
-         nil.src = "./media/O.png";
-         boxStyle[randomNumber].value = nil.value = "O";
-         boxStyle[randomNumber].appendChild(nil);
-         nil.classList.add("place");
-         setTimeout(() => {
-            nil.classList.remove("place");
-         }, 150);
-         playComputerSound()
-         checkWinner();
+         if (remainingSlots.length > 7 || !hardMode) {
+            let randomNumber = remainingSlots[Math.floor(Math.random() * remainingSlots.length)];
+            remainingSlots = remainingSlots.filter(e => e !== randomNumber);
+            let nil = document.createElement('img');
+            nil.src = "./media/O.png";
+            boxStyle[randomNumber].value = nil.value = "O";
+            boxStyle[randomNumber].appendChild(nil);
+            nil.classList.add("place");
+            setTimeout(() => {
+               nil.classList.remove("place");
+            }, 150);
+            playComputerSound();
+            checkWinner();
+         } else {
+            computerPlaysHard();
+            playComputerSound();
+         }
       }, 500);
    }
+}
+
+function computerPlaysHard() {
+   if (boxStyle[0].value == "O" && boxStyle[1].value == "O" && remainingSlots.includes(2)) computerPlace(2);
+   else if (boxStyle[0].value == "O" && boxStyle[2].value == "O" && remainingSlots.includes(1)) computerPlace(1);
+   else if (boxStyle[0].value == "O" && boxStyle[3].value == "O" && remainingSlots.includes(6)) computerPlace(6);
+   else if (boxStyle[0].value == "O" && boxStyle[6].value == "O" && remainingSlots.includes(3)) computerPlace(3);
+   else if (boxStyle[3].value == "O" && boxStyle[6].value == "O" && remainingSlots.includes(0)) computerPlace(0);
+   else if (boxStyle[0].value == "O" && boxStyle[4].value == "O" && remainingSlots.includes(8)) computerPlace(8);
+   else if (boxStyle[0].value == "O" && boxStyle[8].value == "O" && remainingSlots.includes(4)) computerPlace(4);
+   else if (boxStyle[1].value == "O" && boxStyle[4].value == "O" && remainingSlots.includes(7)) computerPlace(7);
+   else if (boxStyle[1].value == "O" && boxStyle[7].value == "O" && remainingSlots.includes(4)) computerPlace(4);
+   else if (boxStyle[4].value == "O" && boxStyle[7].value == "O" && remainingSlots.includes(1)) computerPlace(1);
+   else if (boxStyle[2].value == "O" && boxStyle[5].value == "O" && remainingSlots.includes(8)) computerPlace(8);
+   else if (boxStyle[2].value == "O" && boxStyle[8].value == "O" && remainingSlots.includes(5)) computerPlace(5);
+   else if (boxStyle[2].value == "O" && boxStyle[4].value == "O" && remainingSlots.includes(6)) computerPlace(6);
+   else if (boxStyle[2].value == "O" && boxStyle[6].value == "O" && remainingSlots.includes(4)) computerPlace(4);
+   else if (boxStyle[4].value == "O" && boxStyle[6].value == "O" && remainingSlots.includes(2)) computerPlace(2);
+   else if (boxStyle[5].value == "O" && boxStyle[8].value == "O" && remainingSlots.includes(2)) computerPlace(2);
+   else if (boxStyle[3].value == "O" && boxStyle[4].value == "O" && remainingSlots.includes(5)) computerPlace(5);
+   else if (boxStyle[3].value == "O" && boxStyle[5].value == "O" && remainingSlots.includes(4)) computerPlace(4);
+   else if (boxStyle[5].value == "O" && boxStyle[4].value == "O" && remainingSlots.includes(3)) computerPlace(3);
+   else if (boxStyle[6].value == "O" && boxStyle[7].value == "O" && remainingSlots.includes(8)) computerPlace(8);
+   else if (boxStyle[6].value == "O" && boxStyle[8].value == "O" && remainingSlots.includes(7)) computerPlace(7);
+   else if (boxStyle[7].value == "O" && boxStyle[8].value == "O" && remainingSlots.includes(6)) computerPlace(6);
+   else if (boxStyle[8].value == "O" && boxStyle[4].value == "O" && remainingSlots.includes(0)) computerPlace(0);
+   else {
+      if (boxStyle[0].value == "X" && boxStyle[1].value == "X" && remainingSlots.includes(2)) computerPlace(2);
+      else if (boxStyle[0].value == "X" && boxStyle[2].value == "X" && remainingSlots.includes(1)) computerPlace(1);
+      else if (boxStyle[0].value == "X" && boxStyle[3].value == "X" && remainingSlots.includes(6)) computerPlace(6);
+      else if (boxStyle[0].value == "X" && boxStyle[6].value == "X" && remainingSlots.includes(3)) computerPlace(3);
+      else if (boxStyle[3].value == "X" && boxStyle[6].value == "X" && remainingSlots.includes(0)) computerPlace(0);
+      else if (boxStyle[0].value == "X" && boxStyle[4].value == "X" && remainingSlots.includes(8)) computerPlace(8);
+      else if (boxStyle[0].value == "X" && boxStyle[8].value == "X" && remainingSlots.includes(4)) computerPlace(4);
+      else if (boxStyle[1].value == "X" && boxStyle[4].value == "X" && remainingSlots.includes(7)) computerPlace(7);
+      else if (boxStyle[1].value == "X" && boxStyle[7].value == "X" && remainingSlots.includes(4)) computerPlace(4);
+      else if (boxStyle[4].value == "X" && boxStyle[7].value == "X" && remainingSlots.includes(1)) computerPlace(1);
+      else if (boxStyle[2].value == "X" && boxStyle[5].value == "X" && remainingSlots.includes(8)) computerPlace(8);
+      else if (boxStyle[2].value == "X" && boxStyle[8].value == "X" && remainingSlots.includes(5)) computerPlace(5);
+      else if (boxStyle[2].value == "X" && boxStyle[4].value == "X" && remainingSlots.includes(6)) computerPlace(6);
+      else if (boxStyle[2].value == "X" && boxStyle[6].value == "X" && remainingSlots.includes(4)) computerPlace(4);
+      else if (boxStyle[4].value == "X" && boxStyle[6].value == "X" && remainingSlots.includes(2)) computerPlace(2);
+      else if (boxStyle[5].value == "X" && boxStyle[8].value == "X" && remainingSlots.includes(2)) computerPlace(2);
+      else if (boxStyle[3].value == "X" && boxStyle[4].value == "X" && remainingSlots.includes(5)) computerPlace(5);
+      else if (boxStyle[3].value == "X" && boxStyle[5].value == "X" && remainingSlots.includes(4)) computerPlace(4);
+      else if (boxStyle[5].value == "X" && boxStyle[4].value == "X" && remainingSlots.includes(3)) computerPlace(3);
+      else if (boxStyle[6].value == "X" && boxStyle[7].value == "X" && remainingSlots.includes(8)) computerPlace(8);
+      else if (boxStyle[6].value == "X" && boxStyle[8].value == "X" && remainingSlots.includes(7)) computerPlace(7);
+      else if (boxStyle[7].value == "X" && boxStyle[8].value == "X" && remainingSlots.includes(6)) computerPlace(6);
+      else if (boxStyle[8].value == "X" && boxStyle[4].value == "X" && remainingSlots.includes(0)) computerPlace(0);
+      else {
+         let randomNumber = remainingSlots[Math.floor(Math.random() * remainingSlots.length)];
+         computerPlace(randomNumber);
+      }
+   }
+}
+
+function computerPlace(slot) {
+   remainingSlots = remainingSlots.filter(e => e !== slot);
+   let nil = document.createElement('img');
+   nil.src = "./media/O.png";
+   boxStyle[slot].value = nil.value = "O";
+   boxStyle[slot].appendChild(nil);
+   nil.classList.add("place");
+   setTimeout(() => {
+      nil.classList.remove("place");
+   }, 150);
+   playComputerSound()
+   checkWinner();
 }
 
 function checkWinner() {
@@ -367,5 +453,4 @@ function scoreAnimTie() {
    }, 1000);
    playTieSound();
 }
-
 

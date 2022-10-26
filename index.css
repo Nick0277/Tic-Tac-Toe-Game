@@ -118,7 +118,8 @@ body {
 
 .volumeIcon,
 .multiplayerIcon,
-.resetIcon {
+.resetIcon,
+.hardModeIcon {
    max-width: 100%;
    max-height: 100%;
 }
@@ -335,7 +336,7 @@ body {
    width: 50px;
    height: 50px;
    position: absolute;
-   left: 9em;
+   left: 13em;
    top: 1em;
    cursor: pointer;
    transition-duration: 0.5s;
@@ -349,7 +350,28 @@ body {
 
 .reset:hover,
 .audio:hover,
-.multiplayer:hover {
+.multiplayer:hover,
+.changeMode:hover {
    width: 55px;
    height: 55px;
+}
+
+.changeMode {
+   width: 50px;
+   height: 50px;
+   position: absolute;
+   left: 9em;
+   top: 1em;
+   cursor: pointer;
+   transition-duration: 0.5s;
+}
+
+#modeCheckbox {
+   position: absolute;
+   width: 3em;
+   height: 3em;
+   top: 0.4em;
+   left: 0.4em;
+   opacity: 0;
+   cursor: pointer;
 }
